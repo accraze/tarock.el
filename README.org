@@ -1,0 +1,14 @@
+#+TITLE: tarock
+random tarot reading in emacs org mod
+
+* usage
+how to call via org-capture:
+#+begin_src elisp
+(defun org-journal-tarot-card ()
+  (concat (tarot-card) "\n"))
+
+(setq org-capture-templates
+      '(("t" "Tarot Card" entry
+         (file+datetree "~/org/journal.org")
+         "* %?\n%(org-journal-tarot-card)\n")))
+#+end_src
