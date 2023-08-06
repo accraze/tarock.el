@@ -126,7 +126,25 @@
   (let ((card (nth (random (length tarot-cards)) tarot-cards)))
     (format "Your tarot card for today is:\n%s\n%s" (car card) (cdr card))))
 
-(message (tarot-card-message))
+(defun org-insert-journal-entry (entry)
+  "Inserts the given ENTRY as an Org journal entry."
+  (save-excursion
+    (end-of-buffer)
+    (newline)
+    (insert "* " (format-time-string "%Y-%m-%d") "\n")
+    (insert "** Tarot Card\n")
+    (insert entry)
+    (org-mode)))
+
+(defun org-insert-tarot-card-journal-entry ()
+  "Inserts the tarot card message as an Org journal entry."
+  (interactive)
+  (let ((entry (tarot-card-message)))
+    (org-insert-journal-entry entry)))
+
+(defun get-tarot-card-message ()
+  "Returns the tarot card message."
+  (tarot-card-message))
 
 (defun tarot-card ()
   "Return a random tarot card with a basic explanation."
